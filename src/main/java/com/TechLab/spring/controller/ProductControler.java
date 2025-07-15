@@ -34,10 +34,21 @@ public class ProductControler {
     }
 
     @GetMapping("/buscar") //Crear find/{productName} con path variable
-    public String buscarProdcuto(@RequestParam String nombre, @RequestParam (required = false, defaultValue = "asc") String orden){
+    public String buscarProductos(@RequestParam String nombre, @RequestParam (required = false, defaultValue = "asc") String orden){
         return "buscando... nombre: " + nombre + " orden: " + orden;
     }
 
+    // Metodo para editar producto (PUT)
+    @PutMapping("/edit/{idProd}")
+    public String editarProducto(@PathVariable Long idProd, @RequestBody Producto producto) {
+        return ps.editarProducto(idProd, producto);
+    }
+
+    // Metodo para eliminar producto (DELETE)
+    @DeleteMapping("/delete/{idProd}")
+    public String eliminarProducto(@PathVariable Long idProd) {
+         return ps.eliminarProducto(idProd);
+    }
 
     // ..find/3422 ->  ejemplo: le le decimos que busque por el id
     // ..find/{idProd} -> es mejor usar  pathvariable
